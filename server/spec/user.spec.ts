@@ -13,6 +13,7 @@ describe('User Model', () => {
       password: 'test',
     });
 
-    await user.save();
+    let savedUser = await user.save();
+    expect(savedUser.username).toEqual('test');
   });
 });
