@@ -1,4 +1,5 @@
 import { connectTestDB, clearDatabase, closeDatabase } from '../config/test-db';
+import { createValidUser } from '../spec/support/test-helpers';
 import { IUser, User } from './user.model';
 
 beforeAll(async () => await connectTestDB());
@@ -7,13 +8,17 @@ afterAll(async () => await closeDatabase());
 
 describe('User Model', () => {
   it('allows the creation of a user', async () => {
-    let user: IUser = new User({
-      username: 'test',
-      email: 'test',
-      password: 'test',
+    await createValidUser();
+  });
+
+  it('Salts the password', async () => {
+    let newUser = new User({
+      username: 'testUser',
+      email: 'test@test.com',
+      password: 'supersecret',
     });
 
-    let savedUser = await user.save();
-    expect(savedUser.username).toEqual('test');
+    let savedUser = await newUser.save();
+    expect(savedUser.password).not.toEqual('supersecret');
   });
 });

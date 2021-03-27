@@ -20,7 +20,10 @@ const UserSchema: Schema = new Schema({
   password: {
     type: String,
     required: true,
+    bcrypt: true,
   },
 });
+
+UserSchema.plugin(require('mongoose-bcrypt'));
 
 export const User: Model<IUser> = model('User', UserSchema);

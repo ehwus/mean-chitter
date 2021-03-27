@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.12.2"
+    "mongoose": "^5.12.2",
+    "mongoose-bcrypt": "^1.9.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
