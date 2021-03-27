@@ -1,5 +1,5 @@
 import { connectTestDB, clearDatabase, closeDatabase } from '../config/test-db';
-import { IUser, User } from '../users/user.model';
+import { IUser, User } from './user.model';
 
 beforeAll(async () => await connectTestDB());
 afterEach(async () => await clearDatabase());
