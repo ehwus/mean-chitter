@@ -16,8 +16,8 @@ export class UserClass {
   @prop({ required: true })
   public password!: string;
 
-  @prop({ required: true, default: Date.now() })
-  public dateCreated!: Date;
+  @prop({ default: Date.now() })
+  public dateCreated?: Date;
 
   public checkPassword(passwordToCheck: string) {
     if (bcrypt.compareSync(passwordToCheck, this.password)) return true;
