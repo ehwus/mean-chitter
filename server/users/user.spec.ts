@@ -22,4 +22,15 @@ describe('User Model', () => {
     expect(test.checkPassword('foo123')).toBeTrue;
     expect(test.checkPassword('wrong')).toBeFalse;
   });
+
+  it('Puts email and username into lowercase', async () => {
+    let test = await UserModel.create({
+      username: 'TEST123',
+      email: 'TEST@TEST.COM',
+      password: 'foo123',
+    });
+
+    expect(test.username).toEqual('test123');
+    expect(test.email).toEqual('test@test.com');
+  });
 });

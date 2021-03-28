@@ -7,10 +7,10 @@ import bcrypt from 'bcryptjs';
   }
 })
 export class UserClass {
-  @prop({ required: true, unique: true })
+  @prop({ required: true, unique: true, lowercase: true })
   public username!: string;
 
-  @prop({ required: true, unique: true })
+  @prop({ required: true, unique: true, lowercase: true })
   public email!: string;
 
   @prop({ required: true })
