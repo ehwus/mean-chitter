@@ -1,7 +1,7 @@
-import { IUser, User } from '../../users/user.model';
+import { UserModel } from '../../users/user.model';
 
 export const createValidUser = async () => {
-  let user: IUser = new User({
+  let user = await UserModel.create({
     username: 'testuser',
     email: 'test@test.com',
     password: 'test12345',

@@ -1,6 +1,6 @@
 import { connectTestDB, clearDatabase, closeDatabase } from '../config/test-db';
 import { createValidUser } from '../spec/support/test-helpers';
-import { IUser, User } from './user.model';
+import { UserClass, UserModel } from './user.model';
 
 beforeAll(async () => await connectTestDB());
 afterEach(async () => await clearDatabase());
@@ -12,13 +12,14 @@ describe('User Model', () => {
   });
 
   it('Salts the password', async () => {
-    let newUser = new User({
-      username: 'testUser',
+    let test = await UserModel.create({
+      username: 'test123',
       email: 'test@test.com',
-      password: 'supersecret',
+      password: 'foo123',
     });
 
-    let savedUser = await newUser.save();
-    expect(savedUser.password).not.toEqual('supersecret');
+    expect(test.password).not.toEqual('foo123');
+    expect(test.checkPassword('foo123')).toBeTrue;
+    expect(test.checkPassword('wrong')).toBeFalse;
   });
 });
