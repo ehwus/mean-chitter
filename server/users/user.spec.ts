@@ -1,6 +1,6 @@
 import { connectTestDB, clearDatabase, closeDatabase } from '../config/test-db';
 import { createValidUser } from '../spec/support/test-helpers';
-import { UserClass, UserModel } from './user.model';
+import { UserModel } from './user.model';
 
 beforeAll(async () => await connectTestDB());
 afterEach(async () => await clearDatabase());
