@@ -33,4 +33,9 @@ describe('User Model', () => {
     expect(test.username).toEqual('test123');
     expect(test.email).toEqual('test@test.com');
   });
+
+  it("doesn't allow duplicate email or username", async () => {
+    await createValidUser();
+    expect(async () => await createValidUser()).toThrowError;
+  });
 });
