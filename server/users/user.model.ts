@@ -7,7 +7,17 @@ import bcrypt from 'bcryptjs';
   }
 })
 export class UserClass {
-  @prop({ required: true, unique: true, lowercase: true })
+  @prop({
+    required: true,
+    unique: true,
+    lowercase: true,
+    validate: {
+      validator: (value) => {
+        return value.length > 5 && value.length < 20;
+      },
+      message: 'Username must be between 5 and 20 characters',
+    },
+  })
   public username!: string;
 
   @prop({ required: true, unique: true, lowercase: true })
