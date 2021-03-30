@@ -42,6 +42,28 @@ describe('User Model', () => {
     await createValidUser();
     expect(async () => await createValidUser()).toThrowError;
   });
+
+  it('gives error if usernames are less than 5 or greater than 20', async () => {
+    try {
+      await UserModel.create({
+        username: 'f',
+        email: 'foo@foo.com',
+        password: 'foo12345',
+      });
+    } catch (error) {
+      expect(error).toBeTruthy();
+    }
+
+    try {
+      await UserModel.create({
+        username: 'ffsdafddsfsadfsadfasdfasdfgdfgasgfsdfasdfasdgfsdfas',
+        email: 'foo@foo.com',
+        password: 'foo12345',
+      });
+    } catch (error) {
+      expect(error).toBeTruthy();
+    }
+  });
 });
 
 describe('User Route', () => {
