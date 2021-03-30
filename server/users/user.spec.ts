@@ -27,6 +27,18 @@ describe('User Model', () => {
     expect(test.checkPassword('wrong')).toBeFalse;
   });
 
+  it('Does not allow passwords fewer than 5 characters', async () => {
+    try {
+      await UserModel.create({
+        username: 'test123',
+        email: 'test@test.com',
+        password: 'f',
+      });
+    } catch (error) {
+      expect(error).toBeTruthy();
+    }
+  });
+
   it('Puts email and username into lowercase', async () => {
     let test = await UserModel.create({
       username: 'TEST123',

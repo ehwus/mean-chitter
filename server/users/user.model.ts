@@ -3,6 +3,9 @@ import bcrypt from 'bcryptjs';
 
 @pre<UserClass>('save', async function () {
   if (this.isModified('password')) {
+    if (this.password.length < 5)
+      throw new Error('Password must be no fewer than 5 characters');
+
     this.password = await bcrypt.hash(this.password, 8);
   }
 })
