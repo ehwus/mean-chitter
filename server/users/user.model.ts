@@ -1,5 +1,8 @@
 import { prop, getModelForClass, pre } from '@typegoose/typegoose';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
+const jwtSecret = process.env.JWT_SECRET || 'supersecret';
 
 @pre<UserClass>('save', async function () {
   if (this.isModified('password')) {
@@ -10,6 +13,8 @@ import bcrypt from 'bcryptjs';
   }
 })
 export class UserClass {
+  public _id?: string;
+
   @prop({
     required: true,
     unique: true,
@@ -35,6 +40,15 @@ export class UserClass {
   public checkPassword(passwordToCheck: string) {
     if (bcrypt.compareSync(passwordToCheck, this.password)) return true;
     return false;
+  }
+
+  public getJwt() {
+    const payload = {
+      user: {
+        id: this._id,
+      },
+    };
+    return jwt.sign(payload, jwtSecret, { expiresIn: 3600 });
   }
 }
 

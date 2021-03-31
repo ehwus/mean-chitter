@@ -22,18 +22,21 @@ router.post(
     }),
   ],
   async (req: any, res: any) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const { username, email, password } = req.body;
 
-    if (!username || !email || !password)
-      return res.status(400).json('Invalid details');
-
-    await UserModel.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
+    const newUser = await UserModel.create({
+      username,
+      email,
+      password,
     });
 
-    return res.status(200).json('Saved');
+    return res.status(200).json({ token: newUser.getJwt() });
   }
 );
 

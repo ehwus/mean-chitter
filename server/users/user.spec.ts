@@ -83,6 +83,7 @@ describe('User Route', () => {
     it('returns 400 with empty request', async () => {
       const emptyResponse = await request.post('/api/users');
       expect(emptyResponse.status).toEqual(400);
+      expect(emptyResponse.body.errors.length).toEqual(3);
     });
 
     it('creates a user when given valid input', async () => {
@@ -94,6 +95,16 @@ describe('User Route', () => {
 
       const allUsers = await UserModel.find({});
       expect(allUsers.length).toEqual(1);
+    });
+
+    it('Gives a response of a JWT when a valid user is created', async () => {
+      const validResponse = await request.post('/api/users').send({
+        username: 'testuser',
+        email: 'test@test.com',
+        password: 'Partario',
+      });
+
+      expect(validResponse.body.token).toBeTruthy();
     });
   });
 });
