@@ -29,12 +29,17 @@ router.post(
     }
 
     const { username, email, password } = req.body;
+    let newUser;
 
-    const newUser = await UserModel.create({
-      username,
-      email,
-      password,
-    });
+    try {
+      newUser = await UserModel.create({
+        username,
+        email,
+        password,
+      });
+    } catch (error) {
+      return res.status(400).json();
+    }
 
     return res.status(200).json({ token: newUser.getJwt() });
   }

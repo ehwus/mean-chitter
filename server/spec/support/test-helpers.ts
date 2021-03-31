@@ -1,9 +1,12 @@
 import { UserModel } from '../../users/user.model';
 
+export const defaultUsername = 'testuser';
+export const defaultEmail = 'test@test.com';
+
 export const createValidUser = async () => {
   let user = await UserModel.create({
-    username: 'testuser',
-    email: 'test@test.com',
+    username: defaultUsername,
+    email: defaultEmail,
     password: 'test12345',
   });
 

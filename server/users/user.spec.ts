@@ -1,6 +1,10 @@
 import { connectTestDB, clearDatabase, closeDatabase } from '../config/test-db';
 import { server } from '../server';
-import { createValidUser } from '../spec/support/test-helpers';
+import {
+  createValidUser,
+  defaultEmail,
+  defaultUsername,
+} from '../spec/support/test-helpers';
 import { UserModel } from './user.model';
 import supertest from 'supertest';
 
@@ -105,6 +109,17 @@ describe('User Route', () => {
       });
 
       expect(validResponse.body.token).toBeTruthy();
+    });
+
+    it('Returns a status of 400 if email/username are duplicated', async () => {
+      await createValidUser();
+      const duplicateResponse = await request.post('/api/users').send({
+        username: defaultUsername,
+        email: defaultEmail,
+        password: 'secure123',
+      });
+
+      expect(duplicateResponse.status).toBe(400);
     });
   });
 });
