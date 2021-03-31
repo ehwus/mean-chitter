@@ -84,5 +84,16 @@ describe('User Route', () => {
       const emptyResponse = await request.post('/api/users');
       expect(emptyResponse.status).toEqual(400);
     });
+
+    it('creates a user when given valid input', async () => {
+      const validResponse = await request.post('/api/users').send({
+        username: 'testuser',
+        email: 'test@test.com',
+        password: 'Partario',
+      });
+
+      const allUsers = await UserModel.find({});
+      expect(allUsers.length).toEqual(1);
+    });
   });
 });
