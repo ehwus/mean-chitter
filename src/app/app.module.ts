@@ -7,6 +7,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoggedOutComponent } from './navbar/logged-out/logged-out.component';
 import { LoggedInComponent } from './navbar/logged-in/logged-in.component';
 import { LoginBoxComponent } from './login-box/login-box.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { LoginBoxComponent } from './login-box/login-box.component';
     NavbarComponent,
     LoggedOutComponent,
     LoggedInComponent,
-    LoginBoxComponent
+    LoginBoxComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
