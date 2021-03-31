@@ -80,10 +80,9 @@ describe('User Model', () => {
 
 describe('User Route', () => {
   describe('POST /api/users', () => {
-    it('returns an array of errors if given an empty request', async () => {
-      // const createUser = await request.post('/api/users');
-      // const errors = createUser.body.errors.map((e: Error) => e.message);
-      // expect(errors.length).toEqual(3);
+    it('returns 400 with empty request', async () => {
+      const emptyResponse = await request.post('/api/users');
+      expect(emptyResponse.status).toEqual(400);
     });
   });
 });
