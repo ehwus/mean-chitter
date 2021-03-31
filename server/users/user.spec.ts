@@ -120,6 +120,7 @@ describe('User Route', () => {
       });
 
       expect(duplicateResponse.status).toBe(400);
+      expect(duplicateResponse.body.errors.length).toBe(1);
     });
   });
 });

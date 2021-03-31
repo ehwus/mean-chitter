@@ -38,7 +38,9 @@ router.post(
         password,
       });
     } catch (error) {
-      return res.status(400).json();
+      return res
+        .status(400)
+        .json({ errors: ['Username or email already exists'] });
     }
 
     return res.status(200).json({ token: newUser.getJwt() });
