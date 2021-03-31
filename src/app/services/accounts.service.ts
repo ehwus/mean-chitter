@@ -5,6 +5,23 @@ import { Injectable } from '@angular/core';
 export class AccountsService {
   constructor(private http: HttpClient) {}
 
+  register(username: string, email: string, password: string) {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    this.http
+      .post(
+        'http://localhost:4201/api/users',
+        {
+          username,
+          email,
+          password,
+        },
+        { headers }
+      )
+      .subscribe((response) => console.log(response));
+  }
+
   authenticate(email: string, password: string) {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
