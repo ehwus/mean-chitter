@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class AccountsService {
+  currentUser: { id: string; username: string; token: string } | null = null;
   constructor(private http: HttpClient) {}
 
   register(username: string, email: string, password: string) {
