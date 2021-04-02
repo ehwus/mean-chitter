@@ -46,6 +46,8 @@ export class UserClass {
     const payload = {
       user: {
         id: this._id,
+        username: this.username,
+        email: this.email,
       },
     };
     return jwt.sign(payload, jwtSecret, { expiresIn: 3600 });
